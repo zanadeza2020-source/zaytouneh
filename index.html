@@ -56,12 +56,15 @@ button{font-family:inherit}
 
 /* SIDEBAR */
 .sidebar{
-  width:var(--sb);min-height:100vh;background:var(--gd);
+  width:var(--sb);height:100vh;background:var(--gd);
   position:fixed;top:0;right:0;z-index:299;
   display:flex;flex-direction:column;
   padding:28px 0 20px;
   box-shadow:-4px 0 24px rgba(0,0,0,.15);
   overflow-y:auto;
+  overflow-x:hidden;
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior:contain;
   transform:translateX(100%);
   transition:transform var(--tr);
 }
@@ -205,6 +208,41 @@ button{font-family:inherit}
 .re-cmt{font-size:13px;color:var(--tm);margin-top:3px}
 .re-date{font-size:11px;color:var(--mu);margin-top:2px}
 
+/* PAGE SYSTEM — rating and contact as overlay pages */
+.page-overlay{position:fixed;inset:0;z-index:450;background:var(--cr);overflow-y:auto;-webkit-overflow-scrolling:touch;transform:translateX(-100%);transition:transform .32s cubic-bezier(.4,0,.2,1);will-change:transform}
+.page-overlay.open{transform:translateX(0)}
+.page-hdr{position:sticky;top:0;z-index:10;background:var(--gd);height:var(--hh);display:flex;align-items:center;gap:12px;padding:0 16px;box-shadow:0 2px 12px rgba(0,0,0,.15)}
+.page-hdr-back{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.2);color:#fff;border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:20px;flex-shrink:0;transition:var(--tr)}
+.page-hdr-back:hover{background:rgba(255,255,255,.28)}
+.page-hdr-title{font-family:'Amiri',serif;font-size:20px;font-weight:700;color:#fff;flex:1}
+.page-body{padding:20px 0 calc(var(--nh) + 20px)}
+
+/* CONTACT PAGE */
+.con-page-sec{padding:0 16px 20px;max-width:900px;margin:0 auto}
+.con-page-title{font-family:'Amiri',serif;font-size:20px;color:var(--td);margin-bottom:12px;padding-top:8px;border-bottom:2px solid var(--gw);padding-bottom:8px}
+.con-list{display:flex;flex-direction:column;gap:10px}
+.con-card{display:flex;align-items:center;gap:14px;background:#fff;border-radius:var(--r2);padding:16px;box-shadow:var(--sh1);transition:var(--tr);border:2px solid transparent;text-decoration:none;color:inherit}
+.con-card:hover{transform:translateY(-2px);box-shadow:var(--sh2)}
+.con-card.ig:hover{border-color:#e91e8c;background:#fdf0f7}
+.con-card.fb:hover{border-color:#1877f2;background:#f0f4ff}
+.con-card.wa:hover{border-color:#25d366;background:#f0fdf4}
+.con-card.tt:hover{border-color:#000;background:#f5f5f5}
+.con-card.ph:hover{border-color:var(--gm);background:var(--gw)}
+.con-ico{width:46px;height:46px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0}
+.con-ico.ig-bg{background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)}
+.con-ico.fb-bg{background:#1877f2}
+.con-ico.wa-bg{background:#25d366}
+.con-ico.tt-bg{background:#000}
+.con-ico.ph-bg{background:var(--gm)}
+.con-ico.loc-bg{background:var(--go)}
+.con-ico svg{width:24px;height:24px}
+.con-ico-emoji{font-size:22px}
+.con-info{display:flex;flex-direction:column;gap:3px;flex:1;min-width:0}
+.con-lbl{font-size:11px;color:var(--mu);font-weight:700;text-transform:uppercase;letter-spacing:.6px}
+.con-val{font-size:14px;color:var(--td);font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.con-sub{font-size:12px;color:var(--tl)}
+.con-arr{color:var(--mu);font-size:18px;flex-shrink:0}
+
 /* SESSION SHEET */
 .sess-ov{position:fixed;inset:0;z-index:800;background:rgba(0,0,0,.5);backdrop-filter:blur(3px)}
 .sess-sh{position:fixed;bottom:0;left:0;right:0;z-index:801;background:var(--cr);border-radius:var(--r4) var(--r4) 0 0;padding:22px 16px calc(22px + env(safe-area-inset-bottom));max-width:600px;margin:0 auto;animation:mup .3s cubic-bezier(.4,0,.2,1);max-height:85vh;overflow-y:auto}
@@ -226,20 +264,6 @@ button{font-family:inherit}
 .sess-btn.p:hover{background:var(--gd)}
 .sess-btn.d{background:#fde8e8;color:#c0392b}
 .sess-btn.d:hover{background:#fbd0d0}
-
-/* CONTACT */
-.con-sec{padding:0 16px 20px;max-width:900px;margin:0 auto}
-.con-title{font-family:'Amiri',serif;font-size:22px;color:var(--td);margin-bottom:14px}
-.con-grid{display:grid;grid-template-columns:1fr;gap:10px}
-.con-card{display:flex;align-items:center;gap:12px;background:#fff;border-radius:var(--r2);padding:14px;box-shadow:var(--sh1);transition:var(--tr);border:2px solid transparent}
-.con-card:hover{transform:translateY(-2px);box-shadow:var(--sh2)}
-.con-card.ig:hover{border-color:#e91e8c}
-.con-card.fb:hover{border-color:#1877f2}
-.con-card.wa:hover{border-color:#25d366}
-.con-ico{font-size:26px;flex-shrink:0}
-.con-info{display:flex;flex-direction:column;gap:2px;min-width:0}
-.con-lbl{font-size:10px;color:var(--mu);font-weight:700;text-transform:uppercase;letter-spacing:.5px}
-.con-val{font-size:12px;color:var(--td);font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 
 /* FOOTER */
 footer{background:var(--gd);color:rgba(255,255,255,.65);padding:28px 20px 22px;text-align:center}
@@ -314,7 +338,6 @@ footer p{font-size:13px;margin-bottom:4px}
 
 /* ── Base (all screens, default = small phone 320px+) ── */
 .mgrid{grid-template-columns:1fr;gap:12px}
-.con-grid{grid-template-columns:1fr 1fr}
 .cat-btn{padding:7px 10px;min-width:58px}
 .cat-ico{font-size:20px}
 .cat-btn span:last-child{font-size:10px}
@@ -325,7 +348,7 @@ footer p{font-size:13px;margin-bottom:4px}
 .menu-sec{padding:14px 12px}
 .search-wrap{padding:10px 12px 4px}
 .rat-sec{padding:0 12px 16px}
-.con-sec{padding:0 12px 16px}
+.con-page-sec{padding:0 12px 16px}
 .rat-card{padding:18px 14px}
 .mbody{padding:16px 14px}
 
@@ -342,7 +365,6 @@ footer p{font-size:13px;margin-bottom:4px}
 /* Small-medium phone 360px+ */
 @media(min-width:360px){
   .mgrid{grid-template-columns:repeat(2,1fr);gap:12px}
-  .con-grid{grid-template-columns:1fr 1fr}
   .menu-sec{padding:16px 14px}
   .search-wrap{padding:10px 14px 4px}
 }
@@ -356,7 +378,7 @@ footer p{font-size:13px;margin-bottom:4px}
   .menu-sec{padding:18px 16px}
   .search-wrap{padding:12px 16px 4px}
   .rat-sec{padding:0 16px 18px}
-  .con-sec{padding:0 16px 18px}
+  .con-page-sec{padding:0 16px 18px}
   .rat-card{padding:20px 18px}
   .hdr-in{padding:0 16px}
   .cbody{padding:12px}
@@ -369,12 +391,11 @@ footer p{font-size:13px;margin-bottom:4px}
   .mgrid{grid-template-columns:repeat(3,1fr);gap:16px}
   .mcard.wide{grid-column:auto;flex-direction:column}
   .mcard.wide .cimg{width:100%;height:auto;aspect-ratio:1;border-radius:var(--r3) var(--r3) 0 0}
-  .con-grid{grid-template-columns:repeat(3,1fr)}
   .hdr-in{padding:0 24px}
   .menu-sec{padding:22px 20px}
   .search-wrap{padding:14px 20px 6px}
   .rat-sec{padding:0 20px 20px}
-  .con-sec{padding:0 20px 20px}
+  .con-page-sec{padding:0 20px 20px}
   .rat-card{padding:24px 22px}
   .cat-btn{padding:8px 14px;min-width:68px}
   .cat-ico{font-size:23px}
@@ -390,7 +411,7 @@ footer p{font-size:13px;margin-bottom:4px}
   .menu-sec{padding:24px}
   .search-wrap{padding:16px 24px 6px}
   .rat-sec{padding:0 24px 24px}
-  .con-sec{padding:0 24px 24px}
+  .con-page-sec{padding:0 24px 24px}
   .rat-card{padding:28px 26px}
   .sess-sh{max-width:520px;padding:28px 24px}
 }
@@ -408,8 +429,8 @@ footer p{font-size:13px;margin-bottom:4px}
   .search-wrap{padding:20px 32px 8px}
   .hero{padding:60px 40px 72px}
   .rat-sec{padding:0 32px 28px}
-  .con-sec{padding:0 32px 28px}
   .rat-card{padding:32px 30px}
+  .con-page-sec{padding:0 32px 28px}
   .moverlay{align-items:center}
   .modal{border-radius:var(--r4);max-width:520px;align-self:center;margin:auto}
   @keyframes mup{from{transform:scale(.9);opacity:0}to{transform:scale(1);opacity:1}}
@@ -417,6 +438,10 @@ footer p{font-size:13px;margin-bottom:4px}
   @keyframes tin{from{transform:translateY(16px);opacity:0}to{transform:translateY(0);opacity:1}}
   .ibanner{left:calc(var(--sb) + 20px);right:20px;bottom:20px;max-width:480px}
   .sess-sh{border-radius:var(--r4);bottom:auto;top:50%;transform:translateY(-50%);right:calc(var(--sb) + 40px);left:40px;max-width:560px;margin:0 auto;padding:32px}
+  /* On desktop pages become panels inside main */
+  .page-overlay{position:absolute;right:var(--sb);left:0;transform:translateX(-100%)}
+  .page-overlay.open{transform:translateX(0)}
+  .page-hdr{height:64px}
 }
 
 /* Wide desktop 1280px+ */
@@ -597,36 +622,6 @@ footer p{font-size:13px;margin-bottom:4px}
       <div class="mgrid" id="mgrid"></div>
     </main>
 
-    <!-- RATING -->
-    <section class="rat-sec" id="secRating">
-      <div class="rat-card">
-        <div class="rat-hdr"><h3>⭐ قيّم تجربتك</h3><p>رأيك يهمنا لنقدم لك الأفضل دائماً</p></div>
-        <div class="srow" id="starsRow">
-          <button class="star-btn" data-v="1">★</button><button class="star-btn" data-v="2">★</button>
-          <button class="star-btn" data-v="3">★</button><button class="star-btn" data-v="4">★</button>
-          <button class="star-btn" data-v="5">★</button>
-        </div>
-        <div class="rlbls"><span>ضعيف</span><span>ممتاز</span></div>
-        <textarea id="ratingComment" placeholder="أضف تعليقك هنا (اختياري)..." rows="3"></textarea>
-        <button class="sub-rat" id="subRat">إرسال التقييم 🚀</button>
-        <div class="rat-ok hidden" id="ratOk">✅ شكراً على تقييمك! رأيك يساعدنا كثيراً 💚</div>
-        <div class="prats" id="prats"></div>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section class="con-sec" id="secContact">
-      <h3 class="con-title">📞 تواصل معنا</h3>
-      <div class="con-grid">
-        <a href="tel:+963991234567" class="con-card"><div class="con-ico">📞</div><div class="con-info"><span class="con-lbl">اتصل بنا</span><span class="con-val">+963 99 123 4567</span></div></a>
-        <a href="tel:+963981234567" class="con-card"><div class="con-ico">📱</div><div class="con-info"><span class="con-lbl">خط ثاني</span><span class="con-val">+963 98 123 4567</span></div></a>
-        <a href="https://instagram.com/zaytouneh_rest" target="_blank" class="con-card ig"><div class="con-ico">📸</div><div class="con-info"><span class="con-lbl">إنستغرام</span><span class="con-val">@zaytouneh_rest</span></div></a>
-        <a href="https://facebook.com/zaytounehrest" target="_blank" class="con-card fb"><div class="con-ico">👥</div><div class="con-info"><span class="con-lbl">فيسبوك</span><span class="con-val">zaytouneh.rest</span></div></a>
-        <a href="https://wa.me/963991234567" target="_blank" class="con-card wa"><div class="con-ico">💬</div><div class="con-info"><span class="con-lbl">واتساب</span><span class="con-val">تواصل الآن</span></div></a>
-        <div class="con-card"><div class="con-ico">📍</div><div class="con-info"><span class="con-lbl">العنوان</span><span class="con-val">الشارع الرئيسي، وسط المدينة</span></div></div>
-      </div>
-    </section>
-
     <footer>
       <div class="ft-logo">
         <svg viewBox="0 0 100 100" width="36" xmlns="http://www.w3.org/2000/svg">
@@ -646,6 +641,126 @@ footer p{font-size:13px;margin-bottom:4px}
     <button class="nb" data-s="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><span>بحث</span></button>
     <button class="nb" data-s="contact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013 12.91a19.79 19.79 0 01-3.07-8.67A2 2 0 011.9 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg><span>تواصل</span></button>
   </nav>
+</div>
+
+<!-- ===== PAGE: RATING ===== -->
+<div class="page-overlay" id="pageRating">
+  <header class="page-hdr">
+    <button class="page-hdr-back" id="ratBack">&#8250;</button>
+    <div class="page-hdr-title">⭐ تقييم المطعم</div>
+  </header>
+  <div class="page-body">
+    <div class="rat-sec">
+      <div class="rat-card">
+        <div class="rat-hdr"><h3>⭐ قيّم تجربتك</h3><p>رأيك يهمنا لنقدم لك الأفضل دائماً</p></div>
+        <div class="srow" id="starsRow">
+          <button class="star-btn" data-v="1">★</button><button class="star-btn" data-v="2">★</button>
+          <button class="star-btn" data-v="3">★</button><button class="star-btn" data-v="4">★</button>
+          <button class="star-btn" data-v="5">★</button>
+        </div>
+        <div class="rlbls"><span>ضعيف</span><span>ممتاز</span></div>
+        <textarea id="ratingComment" placeholder="أضف تعليقك هنا (اختياري)..." rows="3"></textarea>
+        <button class="sub-rat" id="subRat">إرسال التقييم 🚀</button>
+        <div class="rat-ok hidden" id="ratOk">✅ شكراً على تقييمك! رأيك يساعدنا كثيراً 💚</div>
+        <div class="prats" id="prats"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== PAGE: CONTACT ===== -->
+<div class="page-overlay" id="pageContact">
+  <header class="page-hdr">
+    <button class="page-hdr-back" id="conBack">&#8250;</button>
+    <div class="page-hdr-title">📞 تواصل معنا</div>
+  </header>
+  <div class="page-body">
+    <div class="con-page-sec">
+
+      <div class="con-page-title">📱 وسائل التواصل الاجتماعي</div>
+      <div class="con-list" style="margin-bottom:24px">
+        <a href="https://instagram.com/zaytouneh_rest" target="_blank" class="con-card ig">
+          <div class="con-ico ig-bg"><svg viewBox="0 0 24 24" fill="white"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="white" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="white" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.5" fill="white"/></svg></div>
+          <div class="con-info">
+            <span class="con-lbl">إنستغرام</span>
+            <span class="con-val">@zaytouneh_rest</span>
+            <span class="con-sub">تابعنا لأحدث العروض والأخبار</span>
+          </div>
+          <span class="con-arr">›</span>
+        </a>
+        <a href="https://tiktok.com/@zaytouneh_rest" target="_blank" class="con-card tt">
+          <div class="con-ico tt-bg"><svg viewBox="0 0 24 24" fill="white"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.34 6.34 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.79 1.54V6.78a4.85 4.85 0 01-1.02-.09z"/></svg></div>
+          <div class="con-info">
+            <span class="con-lbl">تيكتوك</span>
+            <span class="con-val">@zaytouneh_rest</span>
+            <span class="con-sub">مقاطع ووصفات وكواليس المطبخ</span>
+          </div>
+          <span class="con-arr">›</span>
+        </a>
+        <a href="https://facebook.com/zaytounehrest" target="_blank" class="con-card fb">
+          <div class="con-ico fb-bg"><svg viewBox="0 0 24 24" fill="white"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></div>
+          <div class="con-info">
+            <span class="con-lbl">فيسبوك</span>
+            <span class="con-val">zaytouneh.rest</span>
+            <span class="con-sub">صفحتنا الرسمية على فيسبوك</span>
+          </div>
+          <span class="con-arr">›</span>
+        </a>
+        <a href="https://wa.me/972599123456" target="_blank" class="con-card wa">
+          <div class="con-ico wa-bg"><svg viewBox="0 0 24 24" fill="white"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></div>
+          <div class="con-info">
+            <span class="con-lbl">واتساب</span>
+            <span class="con-val">+972 59 912 3456</span>
+            <span class="con-sub">تواصل مباشر — ردّ سريع</span>
+          </div>
+          <span class="con-arr">›</span>
+        </a>
+      </div>
+
+      <div class="con-page-title">📞 أرقام الهاتف</div>
+      <div class="con-list" style="margin-bottom:24px">
+        <a href="tel:+97225123456" class="con-card ph">
+          <div class="con-ico ph-bg"><span class="con-ico-emoji">📞</span></div>
+          <div class="con-info">
+            <span class="con-lbl">الخط الرئيسي</span>
+            <span class="con-val">+972 2 512 3456</span>
+            <span class="con-sub">الحجوزات والاستفسارات</span>
+          </div>
+          <span class="con-arr">›</span>
+        </a>
+        <a href="tel:+972599123456" class="con-card ph">
+          <div class="con-ico ph-bg"><span class="con-ico-emoji">📱</span></div>
+          <div class="con-info">
+            <span class="con-lbl">الخط الثاني (موبايل)</span>
+            <span class="con-val">+972 59 912 3456</span>
+            <span class="con-sub">متاح يومياً ١٠ص — ١٢م</span>
+          </div>
+          <span class="con-arr">›</span>
+        </a>
+      </div>
+
+      <div class="con-page-title">📍 العنوان وأوقات العمل</div>
+      <div class="con-list">
+        <div class="con-card">
+          <div class="con-ico loc-bg"><span class="con-ico-emoji">📍</span></div>
+          <div class="con-info">
+            <span class="con-lbl">العنوان</span>
+            <span class="con-val">الشارع الرئيسي، وسط المدينة</span>
+            <span class="con-sub">فلسطين</span>
+          </div>
+        </div>
+        <div class="con-card">
+          <div class="con-ico loc-bg"><span class="con-ico-emoji">⏰</span></div>
+          <div class="con-info">
+            <span class="con-lbl">أوقات العمل</span>
+            <span class="con-val">يومياً: ١٠ ص — ١٢ م</span>
+            <span class="con-sub">بما فيها الجمعة والسبت</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </div>
 
 <!-- MODAL -->
@@ -715,36 +830,36 @@ footer p{font-size:13px;margin-bottom:4px}
 })();
 
 const MENU=[
-  {id:1,cat:'shawarma',name:'شاورما دجاج',desc:'شاورما دجاج طازجة مشوية على الحجر مع صلصة الثوم والمخلل وكل الإضافات اللذيذة',e:'🌯',p:'5,000',b:'الأكثر طلباً',bt:'hot',w:false},
-  {id:2,cat:'shawarma',name:'شاورما لحمة',desc:'لحم بتلو مشوي بالتوابل العربية الأصيلة مع صلصة الطحينية والخضار الطازجة',e:'🥩',p:'6,500',b:'',bt:'',w:false},
-  {id:3,cat:'shawarma',name:'شاورما مكسته',desc:'مزيج رائع من الدجاج واللحم معاً مع جميع الإضافات المميزة',e:'🌮',p:'7,000',b:'',bt:'',w:false},
-  {id:4,cat:'shawarma',name:'صحن شاورما',desc:'صحن كبير من شاورما الدجاج مع الأرز والسلطة والخبز العربي — وجبة متكاملة',e:'🍽️',p:'12,000',b:'عرض',bt:'new',w:true},
-  {id:5,cat:'mashawi',name:'كباب حلبي',desc:'كباب اللحم الحلبي الأصيل بالبهارات الخاصة مع الخبز والطماطم الطازجة',e:'🔥',p:'15,000',b:'مميز',bt:'hot',w:false},
-  {id:6,cat:'mashawi',name:'شيش طاووق',desc:'قطع دجاج مرينيت بالليمون والثوم والبهارات مشوية على الفحم الطبيعي',e:'🍢',p:'13,000',b:'',bt:'',w:false},
-  {id:7,cat:'mashawi',name:'مشاوي مشكلة',desc:'طبق مشكل يضم الكباب والشيش طاووق والدجاج المشوي مع مقبلات متنوعة',e:'🥩',p:'25,000',b:'للشخصين',bt:'new',w:true},
-  {id:8,cat:'mashawi',name:'دجاج مشوي',desc:'نصف دجاجة مشوية على الفحم مع التتبيلة الخاصة وصلصة الثوم',e:'🍗',p:'10,000',b:'',bt:'',w:false},
-  {id:9,cat:'mashawi',name:'لحم ضاني مشوي',desc:'قطع لحم ضاني طرية مشوية على الفحم مع أعشاب عربية أصيلة',e:'🐑',p:'20,000',b:'',bt:'',w:false},
-  {id:10,cat:'sandwiches',name:'ساندويش فلافل',desc:'فلافل مقرمشة طازجة مع الطحينية والخضار والمخللات في خبز دافئ',e:'🥙',p:'2,500',b:'',bt:'',w:false},
-  {id:11,cat:'sandwiches',name:'ساندويش شيش',desc:'شيش طاووق مشوي في خبز عربي طازج مع الثوم والخضار الطازجة',e:'🥪',p:'5,000',b:'',bt:'',w:false},
-  {id:12,cat:'sandwiches',name:'ساندويش كفتة',desc:'كفتة لحم مشوية مع الطماطم والبصل والصلصة الخاصة في خبز طازج',e:'🌭',p:'5,500',b:'',bt:'',w:false},
-  {id:13,cat:'sandwiches',name:'سلطة فتوش',desc:'فتوش طازج بالخضروات الموسمية والزيتون وصلصة الليمون مع الخبز المحمص',e:'🥗',p:'4,000',b:'',bt:'',w:false},
-  {id:14,cat:'drinks',name:'عصير ليمون بالنعناع',desc:'ليمون طازج معصور مع النعناع الطازج والسكر — منعش ولذيذ',e:'🍋',p:'3,000',b:'طازج',bt:'new',w:false},
-  {id:15,cat:'drinks',name:'تمر هندي',desc:'شراب التمر هندي الطازج المحضر يومياً بالطريقة التقليدية',e:'🫖',p:'2,500',b:'',bt:'',w:false},
-  {id:16,cat:'drinks',name:'قهوة عربية',desc:'قهوة عربية أصيلة بالهيل والزعفران — مقدمة بالطريقة التقليدية',e:'☕',p:'2,000',b:'',bt:'',w:false},
-  {id:17,cat:'drinks',name:'شاي بالنعناع',desc:'شاي أحمر بالنعناع الطازج أو بدونه — دافئ ومريح',e:'🫖',p:'1,500',b:'',bt:'',w:false},
-  {id:18,cat:'drinks',name:'عصائر طازجة',desc:'برتقال، جزر، مانجو، فراولة، جوافة — طازجة 100% يومياً',e:'🥤',p:'3,500',b:'',bt:'',w:false},
-  {id:19,cat:'drinks',name:'موهيتو منعش',desc:'موهيتو بالنعناع واللايم والصودا — بدون كحول نهائياً',e:'🍹',p:'4,000',b:'جديد',bt:'new',w:false},
-  {id:20,cat:'drinks',name:'مياه وغازيات',desc:'مياه معدنية، كولا، بيبسي، سفن أب، فانتا، ميرندا',e:'💧',p:'1,000',b:'',bt:'',w:false},
-  {id:21,cat:'cake',name:'كيك الشوكولاتة',desc:'كيك شوكولاتة بلجيكية فاخرة مع طبقات الكريمة الناعمة — يطلب مسبقاً',e:'🎂',p:'8,000',b:'طلب مسبق',bt:'new',w:false},
-  {id:22,cat:'cake',name:'كيك الفراولة',desc:'كيك فانيليا خفيف مع كريمة الفراولة الطازجة',e:'🍰',p:'7,500',b:'',bt:'',w:false},
-  {id:23,cat:'cake',name:'كنافة نابلسية',desc:'كنافة نابلسية أصيلة بالجبنة العكاوية والقطر — مقدمة ساخنة',e:'🍮',p:'5,000',b:'الأشهر',bt:'hot',w:false},
-  {id:24,cat:'cake',name:'حلاوة الجبن',desc:'حلاوة الجبن الطازجة مع صلصة المانجو والكريمة الخفيفة',e:'🧁',p:'4,500',b:'',bt:'',w:false},
-  {id:25,cat:'cake',name:'كاتو المانجو',desc:'كاتو خفيف بطبقات المانجو الطازجة والكريمة الفاخرة',e:'🍑',p:'9,000',b:'',bt:'',w:false},
-  {id:26,cat:'argeeleh',name:'أرجيلة توت',desc:'تفاح توت فاخر مع جمر طبيعي هندي ومبسمة فاخرة',e:'💨',p:'8,000',b:'الأكثر طلباً',bt:'hot',w:false},
-  {id:27,cat:'argeeleh',name:'أرجيلة تفاح',desc:'تفاح أخضر وأحمر طازج بنكهة خفيفة ومنعشة',e:'🍎',p:'7,500',b:'',bt:'',w:false},
-  {id:28,cat:'argeeleh',name:'أرجيلة عنب نعناع',desc:'مزيج مميز من العنب والنعناع مع جمر طبيعي فاخر',e:'🍇',p:'8,500',b:'',bt:'',w:false},
-  {id:29,cat:'argeeleh',name:'أرجيلة مشكلة',desc:'مزيج من النكهات المفضلة — يمكن الطلب بشكل مخصص',e:'🌿',p:'9,000',b:'مخصص',bt:'new',w:false},
-  {id:30,cat:'argeeleh',name:'خيزران فاخر',desc:'أرجيلة خيزران للمدخنين المميزين بنكهة قوية',e:'🎋',p:'10,000',b:'VIP',bt:'hot',w:false},
+  {id:1,cat:'shawarma',name:'شاورما دجاج',desc:'شاورما دجاج طازجة مشوية على الحجر مع صلصة الثوم والمخلل وكل الإضافات اللذيذة',e:'🌯',p:'65',b:'الأكثر طلباً',bt:'hot',w:false},
+  {id:2,cat:'shawarma',name:'شاورما لحمة',desc:'لحم بتلو مشوي بالتوابل العربية الأصيلة مع صلصة الطحينية والخضار الطازجة',e:'🥩',p:'75',b:'',bt:'',w:false},
+  {id:3,cat:'shawarma',name:'شاورما مكسته',desc:'مزيج رائع من الدجاج واللحم معاً مع جميع الإضافات المميزة',e:'🌮',p:'80',b:'',bt:'',w:false},
+  {id:4,cat:'shawarma',name:'صحن شاورما',desc:'صحن كبير من شاورما الدجاج مع الأرز والسلطة والخبز العربي — وجبة متكاملة',e:'🍽️',p:'110',b:'عرض',bt:'new',w:true},
+  {id:5,cat:'mashawi',name:'كباب حلبي',desc:'كباب اللحم الحلبي الأصيل بالبهارات الخاصة مع الخبز والطماطم الطازجة',e:'🔥',p:'95',b:'مميز',bt:'hot',w:false},
+  {id:6,cat:'mashawi',name:'شيش طاووق',desc:'قطع دجاج مرينيت بالليمون والثوم والبهارات مشوية على الفحم الطبيعي',e:'🍢',p:'90',b:'',bt:'',w:false},
+  {id:7,cat:'mashawi',name:'مشاوي مشكلة',desc:'طبق مشكل يضم الكباب والشيش طاووق والدجاج المشوي مع مقبلات متنوعة',e:'🥩',p:'120',b:'للشخصين',bt:'new',w:true},
+  {id:8,cat:'mashawi',name:'دجاج مشوي',desc:'نصف دجاجة مشوية على الفحم مع التتبيلة الخاصة وصلصة الثوم',e:'🍗',p:'85',b:'',bt:'',w:false},
+  {id:9,cat:'mashawi',name:'لحم ضاني مشوي',desc:'قطع لحم ضاني طرية مشوية على الفحم مع أعشاب عربية أصيلة',e:'🐑',p:'115',b:'',bt:'',w:false},
+  {id:10,cat:'sandwiches',name:'ساندويش فلافل',desc:'فلافل مقرمشة طازجة مع الطحينية والخضار والمخللات في خبز دافئ',e:'🥙',p:'60',b:'',bt:'',w:false},
+  {id:11,cat:'sandwiches',name:'ساندويش شيش',desc:'شيش طاووق مشوي في خبز عربي طازج مع الثوم والخضار الطازجة',e:'🥪',p:'70',b:'',bt:'',w:false},
+  {id:12,cat:'sandwiches',name:'ساندويش كفتة',desc:'كفتة لحم مشوية مع الطماطم والبصل والصلصة الخاصة في خبز طازج',e:'🌭',p:'72',b:'',bt:'',w:false},
+  {id:13,cat:'sandwiches',name:'سلطة فتوش',desc:'فتوش طازج بالخضروات الموسمية والزيتون وصلصة الليمون مع الخبز المحمص',e:'🥗',p:'62',b:'',bt:'',w:false},
+  {id:14,cat:'drinks',name:'عصير ليمون بالنعناع',desc:'ليمون طازج معصور مع النعناع الطازج والسكر — منعش ولذيذ',e:'🍋',p:'60',b:'طازج',bt:'new',w:false},
+  {id:15,cat:'drinks',name:'تمر هندي',desc:'شراب التمر هندي الطازج المحضر يومياً بالطريقة التقليدية',e:'🫖',p:'55',b:'',bt:'',w:false},
+  {id:16,cat:'drinks',name:'قهوة عربية',desc:'قهوة عربية أصيلة بالهيل والزعفران — مقدمة بالطريقة التقليدية',e:'☕',p:'50',b:'',bt:'',w:false},
+  {id:17,cat:'drinks',name:'شاي بالنعناع',desc:'شاي أحمر بالنعناع الطازج أو بدونه — دافئ ومريح',e:'🫖',p:'45',b:'',bt:'',w:false},
+  {id:18,cat:'drinks',name:'عصائر طازجة',desc:'برتقال، جزر، مانجو، فراولة، جوافة — طازجة 100% يومياً',e:'🥤',p:'65',b:'',bt:'',w:false},
+  {id:19,cat:'drinks',name:'موهيتو منعش',desc:'موهيتو بالنعناع واللايم والصودا — بدون كحول نهائياً',e:'🍹',p:'68',b:'جديد',bt:'new',w:false},
+  {id:20,cat:'drinks',name:'مياه وغازيات',desc:'مياه معدنية، كولا، بيبسي، سفن أب، فانتا، ميرندا',e:'💧',p:'18',b:'',bt:'',w:false},
+  {id:21,cat:'cake',name:'كيك الشوكولاتة',desc:'كيك شوكولاتة بلجيكية فاخرة مع طبقات الكريمة الناعمة — يطلب مسبقاً',e:'🎂',p:'95',b:'طلب مسبق',bt:'new',w:false},
+  {id:22,cat:'cake',name:'كيك الفراولة',desc:'كيك فانيليا خفيف مع كريمة الفراولة الطازجة',e:'🍰',p:'88',b:'',bt:'',w:false},
+  {id:23,cat:'cake',name:'كنافة نابلسية',desc:'كنافة نابلسية أصيلة بالجبنة العكاوية والقطر — مقدمة ساخنة',e:'🍮',p:'75',b:'الأشهر',bt:'hot',w:false},
+  {id:24,cat:'cake',name:'حلاوة الجبن',desc:'حلاوة الجبن الطازجة مع صلصة المانجو والكريمة الخفيفة',e:'🧁',p:'70',b:'',bt:'',w:false},
+  {id:25,cat:'cake',name:'كاتو المانجو',desc:'كاتو خفيف بطبقات المانجو الطازجة والكريمة الفاخرة',e:'🍑',p:'98',b:'',bt:'',w:false},
+  {id:26,cat:'argeeleh',name:'أرجيلة توت',desc:'تفاح توت فاخر مع جمر طبيعي هندي ومبسمة فاخرة',e:'💨',p:'85',b:'الأكثر طلباً',bt:'hot',w:false},
+  {id:27,cat:'argeeleh',name:'أرجيلة تفاح',desc:'تفاح أخضر وأحمر طازج بنكهة خفيفة ومنعشة',e:'🍎',p:'80',b:'',bt:'',w:false},
+  {id:28,cat:'argeeleh',name:'أرجيلة عنب نعناع',desc:'مزيج مميز من العنب والنعناع مع جمر طبيعي فاخر',e:'🍇',p:'90',b:'',bt:'',w:false},
+  {id:29,cat:'argeeleh',name:'أرجيلة مشكلة',desc:'مزيج من النكهات المفضلة — يمكن الطلب بشكل مخصص',e:'🌿',p:'95',b:'مخصص',bt:'new',w:false},
+  {id:30,cat:'argeeleh',name:'خيزران فاخر',desc:'أرجيلة خيزران للمدخنين المميزين بنكهة قوية',e:'🎋',p:'110',b:'VIP',bt:'hot',w:false},
   {id:31,cat:'services',name:'إنترنت مجاني',desc:'واي فاي عالي السرعة مجاني لجميع الزبائن — شبكة: Zaytouneh_Free',e:'📶',p:'مجاني',b:'مجاني',bt:'new',w:false,svc:true},
   {id:32,cat:'services',name:'كهرباء وشحن',desc:'مقابس للشحن متوفرة على جميع الطاولات — USB وعادي',e:'⚡',p:'مجاني',b:'متاح',bt:'new',w:false,svc:true},
   {id:33,cat:'services',name:'خدمة الطاولة',desc:'اطلب مباشرة من طاولتك — يصلك طاقم الخدمة خلال دقائق',e:'🛎️',p:'متاح',b:'سريع',bt:'new',w:false,svc:true},
@@ -782,8 +897,8 @@ function handleDeepLink(){
     },100);
     return;
   }
-  if(page==='rating'){setTimeout(()=>{document.getElementById('secRating').scrollIntoView({behavior:'smooth'})},100);return}
-  if(page==='contact'){setTimeout(()=>{document.getElementById('secContact').scrollIntoView({behavior:'smooth'})},100);return}
+  if(page==='rating'){setTimeout(()=>{openPage('pageRating');setActiveNav('rating',null)},100);return}
+  if(page==='contact'){setTimeout(()=>{openPage('pageContact');setActiveNav('contact',null)},100);return}
   if(page==='search'){setTimeout(()=>{focusSearch()},100);return}
 }
 
@@ -885,7 +1000,7 @@ function mkCard(item,delay){
     return d;
   }
   d.className='mcard'+(item.w?' wide':'');d.style.animationDelay=delay*60+'ms';
-  d.innerHTML=`<div class="cimg" style="position:relative">${item.e}${item.b?`<div class="cbadge ${item.bt}">${item.b}</div>`:''}<button class="cshare" data-id="${item.id}" title="نسخ رابط المنتج">🔗 رابط</button></div><div class="cbody"><div class="cname">${item.name}</div><div class="cdesc">${item.desc}</div><div class="cfoot"><div class="cprice">${item.p}${item.svc?'':' <span class="cur">ل.س</span>'}</div><div class="carrow">←</div></div></div>`;
+  d.innerHTML=`<div class="cimg" style="position:relative">${item.e}${item.b?`<div class="cbadge ${item.bt}">${item.b}</div>`:''}<button class="cshare" data-id="${item.id}" title="نسخ رابط المنتج">🔗 رابط</button></div><div class="cbody"><div class="cname">${item.name}</div><div class="cdesc">${item.desc}</div><div class="cfoot"><div class="cprice">${item.svc?item.p:'₪ '+item.p}</div><div class="carrow">←</div></div></div>`;
   d.addEventListener('click',e=>{
     if(e.target.closest('.cshare')){
       e.stopPropagation();
@@ -899,6 +1014,18 @@ function mkCard(item,delay){
   return d;
 }
 
+// ========= PAGE OVERLAYS =========
+function openPage(id){
+  document.getElementById(id).classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closePage(id){
+  document.getElementById(id).classList.remove('open');
+  document.body.style.overflow='';
+  // reset bottom nav to menu
+  setActiveNav('menu',null);
+}
+
 // ========= NAV =========
 function setActiveNav(s,c){
   document.querySelectorAll('.nb').forEach(b=>b.classList.toggle('act',b.dataset.s===s));
@@ -907,17 +1034,15 @@ function setActiveNav(s,c){
 function navTo(s,c){
   if(s==='session'){openSess();return}
   if(s==='search'){focusSearch();setActiveNav('search',null);return}
+  if(s==='rating'){setActiveNav('rating',null);openPage('pageRating');return}
+  if(s==='contact'){setActiveNav('contact',null);openPage('pageContact');return}
   setActiveNav(s,c);
   if(s==='menu'){
     if(c){document.querySelectorAll('.cat-btn').forEach(b=>b.classList.toggle('active',b.dataset.cat===c));renderMenu(c)}
     document.querySelector('.cats-wrap').scrollIntoView({behavior:'smooth',block:'start'});
-    // update URL
     history.replaceState(null,'',c?getCatUrl(c):getPageUrl('menu'));
     return;
   }
-  const t={rating:'#secRating',contact:'#secContact'};
-  const el=document.querySelector(t[s]);
-  if(el){el.scrollIntoView({behavior:'smooth',block:'start'});history.replaceState(null,'',getPageUrl(s))}
 }
 function initNav(){
   document.getElementById('bnav').addEventListener('click',e=>{const b=e.target.closest('.nb');if(b)navTo(b.dataset.s,null)});
@@ -925,7 +1050,6 @@ function initNav(){
     const b=e.target.closest('.sb-btn');
     if(b){
       navTo(b.dataset.s,b.dataset.c||null);
-      // close sidebar on mobile after nav
       if(window.innerWidth<1024)closeSidebar();
     }
   });
@@ -941,10 +1065,18 @@ function initNav(){
   document.getElementById('ssClose').addEventListener('click',closeSess);
   document.getElementById('ssReset').addEventListener('click',()=>{closeSess();setTimeout(resetSess,300)});
   document.getElementById('sbReset').addEventListener('click',resetSess);
-
-  // Three-dots menu toggle
   document.getElementById('hdrMenuBtn').addEventListener('click',toggleSidebar);
   document.getElementById('sbOverlay').addEventListener('click',closeSidebar);
+  // Page back buttons
+  document.getElementById('ratBack').addEventListener('click',()=>closePage('pageRating'));
+  document.getElementById('conBack').addEventListener('click',()=>closePage('pageContact'));
+  // Swipe back on page overlays
+  ['pageRating','pageContact'].forEach(pid=>{
+    const el=document.getElementById(pid);
+    let sx=0;
+    el.addEventListener('touchstart',e=>{sx=e.touches[0].clientX},{passive:true});
+    el.addEventListener('touchend',e=>{if(e.changedTouches[0].clientX-sx>80)closePage(pid)},{passive:true});
+  });
 }
 
 // ========= MODAL =========
@@ -964,7 +1096,7 @@ function openModal(item){
   document.getElementById('mbadge').textContent=CATBADGE[item.cat]||'🍽️';
   document.getElementById('mtitle').textContent=item.name;
   document.getElementById('mdesc').textContent=item.desc;
-  document.getElementById('mprice').textContent=item.svc?item.p:item.p+' ل.س';
+  document.getElementById('mprice').textContent=item.svc?item.p:'₪ '+item.p;
   // set share link
   const url=getItemUrl(item);
   document.getElementById('mlinkUrl').textContent=url;
